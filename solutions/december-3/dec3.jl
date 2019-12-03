@@ -1,8 +1,8 @@
 a_in, b_in = [split(i, ",") for i in readlines("solutions/december-3/aoc-3.txt")]
 a = [parse_directions(i) for i in a_in]
 b = [parse_directions(i) for i in b_in]
-a_path = move(a)
-b_path = move(b)
+@time a_path = trace(a)
+@time b_path = trace(b)
 intersections = intersect(a_path, b_path)
 
 manhattan_distance.(intersections) |> minimum
@@ -15,3 +15,4 @@ for i in intersections
         path_min = path_sum[1]
     end
 end
+path_min
