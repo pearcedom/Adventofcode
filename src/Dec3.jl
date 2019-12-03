@@ -1,4 +1,4 @@
-export Point, Vec, trace, move_by_vector, move_by_1, reduce_distance, parse_directions, manhattan_distance
+export Point, Vec, trace, parse_directions, manhattan_distance
 
 """
 ------
@@ -23,13 +23,15 @@ struct Vec
     direction
 end
 
-function trace(x::Array{Vec,1}, out = [], start = Point(0, 0))
-    out = vcat(out, move_by_vector(x[1], start))
+manhattan_distance(x::Point) = abs(x.x) + abs(x.y)
+
+function trace(x::Array{Vec,1}, start::Point = Point(0, 0), out::Array = [])
+    out = vcat(out, trace(x[1], start))
     if length(x) === 1 return out end
-    trace(x[2:end], out, out[end])
+    trace(x[2:end], out[end], out)
 end
 
-function move_by_vector(v::Vec, p::Point = Point(0, 0))
+function trace(v::Vec, p::Point = Point(0, 0))
     if v.plane === 'V'
         [Point(p.x, i) for i in p.y:v.direction:p.y+v.distance][2:end]
     elseif v.plane === 'H'
@@ -37,24 +39,11 @@ function move_by_vector(v::Vec, p::Point = Point(0, 0))
     end
 end
 
-function reduce_distance(x::Vec) 
-    x.distance > 0 ? x.distance - 1 : x.distance + 1
-end
-
 function parse_directions(x) 
     if x[1] == 'U' || x[1] == 'R' 
-        Vec(
-            x[1] === 'U' ? 'V' : 'H', 
-            parse(Int, x[2:end]),
-            1
-           )
+        Vec(x[1] === 'U' ? 'V' : 'H', parse(Int, x[2:end]), 1)
     elseif x[1] == 'D' || x[1] == 'L'
-        Vec(
-            x[1] === 'D' ? 'V' : 'H', 
-            -parse(Int, x[2:end]),
-            -1
-           )
+        Vec(x[1] === 'D' ? 'V' : 'H', -parse(Int, x[2:end]), -1)
     end
 end
 
-manhattan_distance(x::Point) = abs(x.x) + abs(x.y)
