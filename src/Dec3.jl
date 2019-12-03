@@ -50,4 +50,4 @@ function parse_directions(x)
     end
 end
 
-manhattan_distance(x::Point) = x.x + x.y
+manhattan_distance(x::Point) = abs(x.x) + abs(x.y)
