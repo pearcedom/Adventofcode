@@ -1,5 +1,4 @@
-export read_program, init_program, process_block!, get_param, get_addr, 
-    opcode2func
+export read_program, init_program, process_block!, get_param, get_addr, opcode2func
 
 function read_program(path)
     readlines(path)[1] |> 
@@ -14,7 +13,7 @@ function init_program(mem, noun, verb)
 end
 
 function process_block!(mem, ptr = 1)
-    if mem[ptr] == 99 return mem end
+    if mem[ptr] == 99 return mem[1] end
     p1, p2 = [get_param(i, mem, ptr) for i in 1:2]
     f = opcode2func(mem[ptr])
     mem[get_addr(3, mem, ptr)] = f(p1, p2)
