@@ -1,0 +1,8 @@
+name = "Adventofcode"
+uuid = "36b97821-3f35-4b4e-bc64-fa9acfc2819d"
+authors = ["dp1 <dominic.pearce@fiosgenomics.com>"]
+version = "0.1.0"
+
+[deps]
+Match = "7eb4fadd-790c-5f42-8a69-bfa0b872bfbf"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
