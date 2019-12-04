@@ -31,3 +31,13 @@ end
     @test intersect(trace(a), trace(b)) .|> manhattan_distance |> minimum === 135
 end
 
+
+@testset "dec4" begin
+    @test check_suitable1(111111) === true
+    @test !check_suitable1(223450) === true
+    @test !check_suitable1(123789) === true
+    
+    @test check_suitable2(112233) === true
+    @test !check_suitable2(123444) === true
+    @test check_suitable2(111122) === true
+end

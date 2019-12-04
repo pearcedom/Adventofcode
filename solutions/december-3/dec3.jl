@@ -8,7 +8,7 @@ intersections = intersect(a_path, b_path)
 manhattan_distance.(intersections) |> minimum
 
 path_min = Inf
-for i in intersections
+@time for i in intersections
     global path_min
     path_sum = [j for j in 1:length(a_path) if i == a_path[j]] + [j for j in 1:length(b_path) if i == b_path[j]]
     if path_sum[1] < path_min
