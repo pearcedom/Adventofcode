@@ -11,16 +11,16 @@
 """
 
 export check_suitable1, check_suitable2
-#import StatsBase
+import StatsBase
 
-function check_suitable1(x)
+function check_suitable1(x)::Bool
     d = digits(x) |> reverse |> diff
-    any(d .== 0) && all(d .>= 0)
+    all(>=(0), d) && any(==(0), d)
 end
 
-function check_suitable2(x)
+function check_suitable2(x)::Bool
     n = digits(x) |> reverse 
     d = diff(n)
     r = StatsBase.rle(n)[2]
-    any(r .== 2) && all(d .>= 0)
+    any(==(r), 2) && all(>=(d), 0)
 end
